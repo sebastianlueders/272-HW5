@@ -64,9 +64,16 @@ class ProblemSolutions {
 
     public int findKthLargest(int[] array, int k) {
 
-        // ADD YOUR CODE HERE
+        PriorityQueue<Integer> pq = new PriorityQueue<>(k);
 
-        return 0;
+        for(int i = 0; i < array.length; i++) {
+            pq.add(array[i]);
+            if(pq.size() > k) {
+                pq.poll();
+            }
+        }
+
+        return pq.peek();
     }
 
 
@@ -85,9 +92,25 @@ class ProblemSolutions {
 
     public int[] sort2Arrays(int[] array1, int[] array2) {
 
-        // ADD YOU CODE HERE
+        int totalElements = array1.length + array2.length;
+        PriorityQueue<Integer> pq = new PriorityQueue<>(totalElements);
+        int[] result = new int[totalElements];
 
-        return null;
+        for(int i = 0; i < array1.length; i++) {
+            pq.add(array1[i]);
+        }
+
+
+        for(int i = 0; i < array2.length; i++) {
+            pq.add(array2[i]);
+        }
+
+        int j = 0;
+        while(!pq.isEmpty()) {
+            result[j++] = pq.poll();
+        }
+
+        return result;
     }
 
 }
