@@ -1,6 +1,6 @@
 /******************************************************************
  *
- *   YOUR NAME / SECTION NUMBER
+ *   SEBASTIAN LUEDERS / SECTION 002
  *
  *   Note, additional comments provided throughout source code is
  *   for educational purposes.
@@ -217,6 +217,16 @@ class BloomFilter {
 
     public boolean contains(String s) {
 
+        boolean result = true;
+        int hashesTested = 0;
+
+        while(result && hashesTested < noHashes) {
+            long hc = hashCode(s, hashesTested);
+            int bitNo = (int) (hc) & this.hashMask;
+            result = data.get(bitNo);
+            hashesTested++;
+        }
+
         // ADD YOUR CODE HERE - DO NOT FORGET TO ADD YOUR NAME AT TOP OF FILE
         //
         // HINT: the bitmap is the private class variable 'data', and it is
@@ -224,7 +234,7 @@ class BloomFilter {
         // this class on available methods. You can also see how method 'add'
         // in this class uses the object.
 
-        return false;
+        return result;
     }
 
 
