@@ -289,7 +289,7 @@ public class Main {
         // have been a cycle causing a rehashing and growth of the map.
         // We instantiated the map object above with 10, it should still
         // be that size.
-
+        
         if ( table.mapSize() != 10 ) {
             cuckooFailure = true;
             System.out.println("Error 16: Test Failure);");
@@ -306,7 +306,7 @@ public class Main {
             cuckooFailure = true;
             System.out.println("Error 17: Test Failure);");
         }
-
+        
         // The following insert will result in a another cycle and rehashing
         // The new resized map size based in implementation should then be 87
 
@@ -317,7 +317,7 @@ public class Main {
             cuckooFailure = true;
             System.out.println("Error 18: Test Failure);");
         }
-
+        
         // Based on the above put operations, the table should contain
         // eight (8) <key,value> pairs. The contents should be:
         //  [ <C, HH> <S, XX> <A, AA> <B, KK> <C, CC> <S, SS> <A, LL> <B, BB> ]
@@ -332,7 +332,7 @@ public class Main {
             cuckooFailure = true;
             System.out.println("Error 19: Test Failure);");
         }
-
+        
         Set<String> keys = new HashSet<>();
         keys.add("A");
         keys.add("B");
@@ -356,7 +356,7 @@ public class Main {
             cuckooFailure = true;
             System.out.println("Error 21: Test Failure);");
         }
-
+        
         // Now, remove two <key, value> pairs from the hash table. We should
         // now have 6 items in teh table - lets verify.
         table.remove("A", "AA");
@@ -366,7 +366,7 @@ public class Main {
             cuckooFailure = true;
             System.out.println("Error 22: Test Failure);");
         }
-
+        
         table.clear();
 
 

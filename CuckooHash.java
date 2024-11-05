@@ -246,14 +246,14 @@ public class CuckooHash<K, V> {
 
  	public void put(K key, V value) {
 
+		//System.out.println("Initial insertion: key=" + key + ", value=" + value);
+
+
 		int numberRenests = 0;
 		K kToInsert = key;
 		V vToInsert = value;
 		int oldPosition = -1;
 		Set<Integer> visited = new HashSet<>();
-
-		System.out.println("key: " + key + "   value: " + value);
-		System.out.println("kToInsert: " + kToInsert + "   vToInsert: " + vToInsert);
 
 		
 		if ((table[hash1(kToInsert)] != null && table[hash1(kToInsert)].getBucKey().equals(kToInsert) && table[hash1(kToInsert)].getValue().equals(vToInsert)) ||
@@ -262,19 +262,9 @@ public class CuckooHash<K, V> {
 			return; // Duplicate k,v check
 		}
 
-
-
-		System.out.println("Attempting to place key: " + key + ", value: " + value);
-
 		while(numberRenests < CAPACITY) {
 
-			int newPosition;
-
-			if(hash2(kToInsert) == oldPosition || numberRenests == 0) {
-				newPosition = hash1(kToInsert);
-			} else {
-				newPosition = hash2(kToInsert);
-			}
+			int newPosition = (hash1(kToInsert) == oldPosition) ?  hash2(kToInsert) : hash1(kToInsert);
 
 			if(visited.contains(newPosition)) {
 				rehash();
@@ -298,8 +288,8 @@ public class CuckooHash<K, V> {
 
 		if(numberRenests == CAPACITY) {
 			rehash();
-			put(kToInsert, vToInsert); 
 		}
+		put(kToInsert, vToInsert); 
 			
 	}
 
